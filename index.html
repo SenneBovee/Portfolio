@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Senne Bovée — Prop Artist & 3D Generalist</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Bodoni+Moda:wght@400;700;800;900&family=Big+Shoulders+Display:wght@700;800;900&family=DM+Serif+Display:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&family=DM+Mono:wght@400;500&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --paper: #f1ebde;
+    --paperSoft: #e8e0cd;
+    --ink: #1b1b1b;
+    --accent: #e2522a;
+    --accent2: #235e64;
+    --accent3: #d99a3a;
+  }
+  html, body { margin: 0; padding: 0; background: var(--paper); font-family: 'Space Grotesk', -apple-system, sans-serif; color: var(--ink); }
+  *, *::before, *::after { box-sizing: border-box; }
+  image-slot { display: block; }
+  babylon-viewer, babylon-viewer::part(tool-bar), babylon-viewer::part(canvas) { background: var(--paper) !important; }
+  babylon-viewer::part(tool-bar) { display: none !important; }
+  babylon-viewer { --ui-background-color: transparent; --ui-foreground-color: rgba(0,0,0,0); }
+  @keyframes rfade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+  /* ── splash ─────────────────────────────────────────── */
+  .splash {
+    position: fixed; inset: 0; z-index: 9999;
+    background: var(--paper);
+    display: grid; place-items: center;
+  }
+  .splash.splash-fade { animation: splash-out .55s cubic-bezier(.6,0,.3,1) forwards; }
+  .splash-stack {
+    display: flex; flex-direction: column; align-items: center; gap: 22px;
+    transform: translateY(-2vh);
+  }
+  /* Rounded-rectangle frame that wraps the logo. Two stacked copies:
+     dim "track" + bright "fill" clipped left-to-right by JS-driven progress. */
+  .splash-logo {
+    position: relative;
+    width: min(52vw, 580px);
+    aspect-ratio: 280 / 140;
+    color: var(--ink);
+  }
+  .splash-logo .layer {
+    position: absolute; inset: 0;
+  }
+  .splash-logo .layer::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: currentColor;
+    -webkit-mask: url(assets/logo.svg) center/contain no-repeat;
+            mask: url(assets/logo.svg) center/contain no-repeat;
+  }
+  .splash-logo .track { color: color-mix(in oklch, var(--ink) 24%, transparent); }
+  .splash-logo .fill  {
+    color: var(--ink);
+    clip-path: inset(0 100% 0 0);
+    transition: clip-path .25s cubic-bezier(.4,0,.2,1);
+  }
+  .splash-meta {
+    display: flex; align-items: center; gap: 14px;
+    font-family: 'DM Mono', monospace; font-size: 11px;
+    letter-spacing: 0.28em; text-transform: uppercase;
+    color: color-mix(in oklch, var(--ink) 70%, transparent);
+  }
+  .splash-meta .pulse {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent);
+    animation: splash-pulse 1s ease-in-out infinite;
+  }
+  @keyframes splash-pulse { 50% { opacity: 0.25; } }
+  @keyframes splash-out { to { opacity: 0; visibility: hidden; pointer-events: none; } }
+
+  /* ── selected-work tiles: scale-in pop ───────────────── */
+  @keyframes tile-pop {
+    0%   { transform: scale(0); opacity: 0; }
+    60%  { opacity: 1; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  .tile-pop {
+    transform-origin: center center;
+    transform: scale(0);
+    opacity: 0;
+    animation: tile-pop .45s cubic-bezier(.2,.7,.3,1) forwards;
+  }
+  /* selection */
+  ::selection { background: var(--accent); color: var(--paper); }
+</style>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script src="image-slot.js"></script>
+<script src="https://cdn.babylonjs.com/babylon.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@babylonjs/viewer/dist/babylon-viewer.esm.min.js"></script>
+</head>
+<body>
+
+<div id="root"></div>
+
+<script type="text/babel" src="shared-data.jsx"></script>
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel" src="riso-app.jsx"></script>
+
+<script type="text/babel">
+ReactDOM.createRoot(document.getElementById('root')).render(<SenneSite />);
+</script>
+
+</body>
+</html>
