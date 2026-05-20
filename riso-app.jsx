@@ -302,9 +302,9 @@ function Tile({ project: p, idx, accent, onPick, t, df, span, appReady }) {
       ...hoverStyle
     }}>
       
-      <image-slot id={`riso-${p.id}-bg`} placeholder={`${p.title} — banner`} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', background: `repeating-linear-gradient(45deg, var(--paperSoft), var(--paperSoft) 6px, var(--paper) 6px, var(--paper) 12px)`, display: 'block', backgroundSize: "cover", backgroundPosition: "center center" }}></image-slot>
+      <image-slot id={`riso-${p.id}-bg`} src={window.workImg(`riso-${p.id}-bg`)} placeholder={`${p.title} — banner`} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', background: `repeating-linear-gradient(45deg, var(--paperSoft), var(--paperSoft) 6px, var(--paper) 6px, var(--paper) 12px)`, display: 'block', backgroundSize: "cover", backgroundPosition: "center center" }}></image-slot>
       <div style={{ position: 'absolute', inset: 0, background: `radial-gradient(circle at 70% 30%, ${accent} 0%, transparent 60%)`, opacity: 0.18, mixBlendMode: 'multiply', pointerEvents: 'none' }} />
-      <image-slot id={`riso-${p.id}-fg`} placeholder="Logo" fit="contain" style={{ position: 'absolute', top: 14, left: 14, background: 'transparent', display: 'block', zIndex: 2, height: "2px", width: "1px" }}></image-slot>
+      <image-slot id={`riso-${p.id}-fg`} src={window.workImg(`riso-${p.id}-fg`)} placeholder="Logo" fit="contain" style={{ position: 'absolute', top: 14, left: 14, background: 'transparent', display: 'block', zIndex: 2, height: "2px", width: "1px" }}></image-slot>
       <div style={{ position: 'absolute', top: 12, right: 12, background: 'var(--ink)', color: 'var(--paper)', padding: '3px 7px', fontFamily: '"DM Mono", monospace', fontSize: 9, letterSpacing: '0.18em', pointerEvents: 'none' }}>0{idx + 1}</div>
       <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: 12, background: `linear-gradient(0deg, var(--paper) 70%, transparent 100%)`, pointerEvents: 'none' }}>
         <div style={{ fontFamily: df.stack, fontWeight: df.weight, fontSize: idx === 0 ? 32 : 22, color: 'var(--ink)', lineHeight: 1, letterSpacing: df.tracking, textTransform: df.transform }}>{p.title}</div>

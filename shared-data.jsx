@@ -111,3 +111,16 @@ window.SENNE = {
     },
   ],
 };
+
+// Map of image-slot IDs → file path in assets/work/. Used as the `src=` fallback
+// on each <image-slot> so the page ships with images pre-assigned. A user drop
+// still overrides this at runtime.
+window.WORK_IMAGES = {
+  'riso-walkie-bg':     'assets/work/riso-walkie-bg.webp',
+  'riso-snails-bg':     'assets/work/riso-snails-bg.webp',
+  'riso-snails-fg':     'assets/work/riso-snails-fg.webp',
+  'riso-granstudio-fg': 'assets/work/riso-granstudio-fg.webp',
+  'riso-fluvia-bg':     'assets/work/riso-fluvia-bg.webp',
+  'riso-saab-bg':       'assets/work/riso-saab-bg.webp',
+};
+window.workImg = (id) => window.WORK_IMAGES[id];
